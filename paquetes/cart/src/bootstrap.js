@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const mount = (el) => {
   async function doGetRequest() {
-    let names = '.';
+    let names = '';
     let res = await axios.get('https://reqres.in/api/users/2');
     var obj = res.data;
-    const cartText = `<div> ..Su correo es: ${obj.data.email} </div>`;
+    const cartText = `<h1>hola</h1><div>Su correo es: ${obj.data.email} </div>`;
     el.innerHTML = cartText;
 
     //console.log(obj);
