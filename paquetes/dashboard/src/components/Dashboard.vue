@@ -10,12 +10,17 @@
     <p>nombre formato: {{nombreFormateado}}</p>
     <p>nombre formato método: {{nombreFormateadoMetodo()}}</p>
 
-    <button v-on:click.once="contador += 1">clic</button>
+    <button v-on:click="contador += 1">clic</button>
     <p>has hecho {{contador}} clics</p>
     <button v-on:click="saludar('Pedro',$event)">hi</button>
     <div class="myDiv" v-bind:class=claseDinamica @click="this.active = !this.active">
       activo?:{{active}}
     </div>
+
+    <template v-if="contador > 0">
+      <p>{{contador}}</p>
+    </template>
+    <p v-else>valor cero</p>
   </div>
 </template>
 
