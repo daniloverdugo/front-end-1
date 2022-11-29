@@ -74,6 +74,166 @@
       </Panel>
     </div>
 
+    <div class="p-col-12 p-lg-6">
+      <div class="card">
+        <h1 style="font-size: 16px">Recent Sales</h1>
+        <DataTable
+          :value="products"
+          class="p-datatable-customers"
+          :rows="5"
+          style="margin-bottom: 20px"
+          :paginator="true"
+        >
+          <Column>
+            <template #header> Logo </template>
+            <template #body="slotProps">
+              <img
+                :src="'assets/layout/images/product/' + slotProps.data.image"
+                :alt="slotProps.data.image"
+                width="50"
+              />
+            </template>
+          </Column>
+          <Column field="name" header="Name" :sortable="true"></Column>
+          <Column field="category" header="Category" :sortable="true"></Column>
+          <Column field="price" header="Price" :sortable="true">
+            <template #body="slotProps">
+              {{ formatCurrency(slotProps.data.price) }}
+            </template>
+          </Column>
+          <Column>
+            <template #header> View </template>
+            <template #body>
+              <Button
+                icon="pi pi-search"
+                type="button"
+                class="p-button-success p-mr-2 p-mb-1"
+              ></Button>
+              <Button
+                icon="pi pi-times"
+                type="button"
+                class="p-button-danger p-mb-1"
+              ></Button>
+            </template>
+          </Column>
+        </DataTable>
+      </div>
+    </div>
+    <div class="p-col-12 p-lg-6">
+      <div class="card">
+        <Chart type="line" :data="lineData" />
+      </div>
+    </div>
+  
+    <div class="p-grid p-fluid dashboard">
+    <div class="p-col-12 p-lg-4">
+      <div class="card summary">
+        <span class="title">Users</span>
+        <span class="detail">Number of visitors</span>
+        <span class="count visitors">12</span>
+      </div>
+    </div>
+    <div class="p-col-12 p-lg-4">
+      <div class="card summary">
+        <span class="title">Sales</span>
+        <span class="detail">Number of purchases</span>
+        <span class="count purchases">534</span>
+      </div>
+    </div>
+    <div class="p-col-12 p-lg-4">
+      <div class="card summary">
+        <span class="title">Revenue</span>
+        <span class="detail">Income for today</span>
+        <span class="count revenue">$3,200</span>
+      </div>
+    </div>
+
+    <div class="p-col-12 p-md-6 p-xl-3">
+      <div class="highlight-box">
+        <div class="initials" style="background-color: #007be5; color: #00448f">
+          <span>TV</span>
+        </div>
+        <div class="highlight-details">
+          <i class="pi pi-search"></i>
+          <span>Total Queries</span>
+          <span class="count">523</span>
+        </div>
+      </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-xl-3">
+      <div class="highlight-box">
+        <div class="initials" style="background-color: #ef6262; color: #a83d3b">
+          <span>TI</span>
+        </div>
+        <div class="highlight-details">
+          <i class="pi pi-question-circle"></i>
+          <span>Total Issues</span>
+          <span class="count">81</span>
+        </div>
+      </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-xl-3">
+      <div class="highlight-box">
+        <div class="initials" style="background-color: #20d077; color: #038d4a">
+          <span>OI</span>
+        </div>
+        <div class="highlight-details">
+          <i class="pi pi-filter"></i>
+          <span>Open Issues</span>
+          <span class="count">21</span>
+        </div>
+      </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-xl-3">
+      <div class="highlight-box">
+        <div class="initials" style="background-color: #f9c851; color: #b58c2b">
+          <span>CI</span>
+        </div>
+        <div class="highlight-details">
+          <i class="pi pi-check"></i>
+          <span>Closed Issues</span>
+          <span class="count">60</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-col-12 p-md-6 p-lg-4">
+      <Panel header="Tasks" style="height: 100%">
+        <ul class="task-list">
+          <li>
+            <Checkbox name="task" value="reports" v-model="tasksCheckbox" />
+            <span class="task-name">Sales Reports</span>
+            <i class="pi pi-chart-bar" />
+          </li>
+          <li>
+            <Checkbox name="task" value="invoices" v-model="tasksCheckbox" />
+            <span class="task-name">Pay Invoices</span>
+            <i class="pi pi-dollar" />
+          </li>
+          <li>
+            <Checkbox name="task" value="dinner" v-model="tasksCheckbox" />
+            <span class="task-name">Dinner with Tony</span>
+            <i class="pi pi-user" />
+          </li>
+          <li>
+            <Checkbox name="task" value="meeting" v-model="tasksCheckbox" />
+            <span class="task-name">Client Meeting</span>
+            <i class="pi pi-users" />
+          </li>
+          <li>
+            <Checkbox name="task" value="theme" v-model="tasksCheckbox" />
+            <span class="task-name">New Theme</span>
+            <i class="pi pi-globe" />
+          </li>
+          <li>
+            <Checkbox name="task" value="flight" v-model="tasksCheckbox" />
+            <span class="task-name">Flight Ticket</span>
+            <i class="pi pi-briefcase" />
+          </li>
+        </ul>
+      </Panel>
+    </div>
+
     <button v-on:click="contador += 1">clic</button>
     <p>has hecho {{contador}} clics</p>
     <button v-on:click="saludar('Pedro',$event)">hi</button>
@@ -89,6 +249,8 @@
     <button v-on:click="addPersona()">persona</button>
     <button v-on:click="getPersonas()">personas</button>
     <div v-html="miHtml"></div>
+  </div>
+
   </div>
 </template>
 
@@ -136,14 +298,54 @@ import axios from 'axios';
                 <br>
                 en Vue. Aquí un link:
                 <a href="//parzibyte.me/blog">parzibyte.me/blog</a>`,
-        dropdownCities: [
-          { name: 'New York', code: 'NY' },
-          { name: 'Rome', code: 'RM' },
-          { name: 'London', code: 'LDN' },
-          { name: 'Istanbul', code: 'IST' },
-          { name: 'Paris', code: 'PRS' },
+                tasksCheckbox: [],
+      dropdownCities: [
+        { name: 'New York', code: 'NY' },
+        { name: 'Rome', code: 'RM' },
+        { name: 'London', code: 'LDN' },
+        { name: 'Istanbul', code: 'IST' },
+        { name: 'Paris', code: 'PRS' },
+      ],
+      dropdownCity: null,
+      options: {
+        defaultDate: '2019-01-01',
+        header: {
+          left: 'prev,next',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay',
+        },
+        editable: true,
+      },
+      events: null,
+      products: null,
+      selectedProducts: null,
+      lineData: {
+        labels: [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
         ],
-        dropdownCity: null,
+        datasets: [
+          {
+            label: 'First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            backgroundColor: '#2f4860',
+            borderColor: '#2f4860',
+          },
+          {
+            label: 'Second Dataset',
+            data: [28, 48, 40, 19, 86, 27, 90],
+            fill: false,
+            backgroundColor: '#00bb7e',
+            borderColor: '#00bb7e',
+          },
+        ],
+      },
     }
     },
     methods: {
