@@ -24,12 +24,12 @@
 
     <button v-on:click="addPersona()">persona</button>
     <button v-on:click="getPersonas()">personas</button>
+    <div v-html="miHtml"></div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { ref } from 'vue';
   export default {
     setup(){ 
         },
@@ -40,6 +40,12 @@ import { ref } from 'vue';
         apellido:"luLIn",
         contador:0,
         active:false,
+        miHtml: `<strong>Soy HTML</strong> y puedo
+                <br>Ser
+                <br>Inyectado
+                <br>
+                en Vue. Aquí un link:
+                <a href="//parzibyte.me/blog">parzibyte.me/blog</a>`,
     }
     },
     methods: {
@@ -64,17 +70,25 @@ import { ref } from 'vue';
           .catch(error => console.log(error))
         },
         getPersonas(){
-        const personas = ref([]);         
         axios.get('https://reqres.in/api/users')
           .then(res => {
+            const personas=[];
+
            for (const id in res.data.data){
-              personas.value.push({
+              personas.push({
                 id:  res.data.data[id].id,
                 email: res.data.data[id].email,
                 avatar:res.data.data[id].avatar
               })
             }
-            console.log(personas.value);
+            //console.log(personas);
+            let nms="<ul>";
+            for (const item in personas){
+              //console.log(personas[item].avatar);
+              nms += `<li>` + personas[item].email + `</li>`
+            };
+            nms+="</ul>"
+            this.miHtml=nms
           })
           .catch(error => console.log(error))
         },
