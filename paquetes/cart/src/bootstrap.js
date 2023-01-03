@@ -5,7 +5,7 @@ const mount = (el) => {
     let names = '';
     let res = await axios.get('https://reqres.in/api/users/2');
     var obj = res.data;
-    const cartText = `<h1>hola</h1><div>Su correin es: ${obj.data.email} </div>`;
+    const cartText = `<h1>Hola</h1><div>Su correin es  :    ${obj.data.email} </div>`;
     el.innerHTML = cartText;
 
     //console.log(obj);
