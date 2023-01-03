@@ -8,7 +8,7 @@ const mount = (el) => {
     const cartText = `<h1>Hola</h1><div>Su correin es  :    ${obj.data.email} </div>`;
     el.innerHTML = cartText;
 
-    //console.log(obj);
+    console.log("1 "+ obj);
   }
   doGetRequest();
 
@@ -19,7 +19,7 @@ const mount = (el) => {
     const cartText = `<h1>Hola</h1><div>Su correin es  :    ${obj.data.email} </div>`;
     el.innerHTML = cartText;
 
-    //console.log(obj);
+    console.log("2 "+ obj);
   }
   doGetRequest1();
 };
